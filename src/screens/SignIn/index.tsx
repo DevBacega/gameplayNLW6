@@ -1,17 +1,20 @@
-import React from 'react';
-import { View, Image, StatusBar, Text } from 'react-native';
+import React, { useCallback } from 'react';
+
+import { View, Image, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import IllustrationImg from '../../assets/illustration.png';
 import ButtonIcon from '../../components/ButtonIcon';
 
 const SignIn: React.FC = () => {
+  const navigation = useNavigation();
+
+  const handleSignIn = useCallback(() => {
+    navigation.navigate('Home');
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
       <Image
         source={IllustrationImg}
         style={styles.image}
@@ -20,9 +23,8 @@ const SignIn: React.FC = () => {
 
       <View style={styles.content}>
         <Text style={styles.title}>
-          Organize {'\n'}
-          suas jogatinas {'\n'}
-          facilmente
+          Conecte-se {'\n'}e organize suas {'\n'}
+          jogatinas
         </Text>
 
         <Text style={styles.subtitle}>
@@ -30,7 +32,7 @@ const SignIn: React.FC = () => {
           favoritos com seus amigos
         </Text>
 
-        <ButtonIcon title="Entre com o discord" activeOpacity={0.7} />
+        <ButtonIcon title="Entre com o discord" onPress={handleSignIn} />
       </View>
     </View>
   );
